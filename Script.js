@@ -200,6 +200,7 @@ class TicTacToe {
       cell.removeAttribute("data-player");
       cell.classList.remove("player-x", "player-o", "winning-cell");
       cell.style.background = "rgba(255, 255, 255, 0.9)"; // Reset to initial white background
+      cell.style.removeProperty("backgroundColor"); // Remove hover effect
     });
 
     // Reset status message

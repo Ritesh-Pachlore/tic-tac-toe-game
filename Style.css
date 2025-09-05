@@ -159,21 +159,17 @@ header h1 {
 }
 
 /* Colorful styling for X player */
+/* Colorful styling for X player */
 .cell.player-x {
-  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ff6b6b;
   font-weight: bold;
   text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
 }
 
 /* Colorful styling for O player */
+/* Colorful styling for O player */
 .cell.player-o {
-  background: linear-gradient(45deg, #4834d4, #686de0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #4834d4;
   font-weight: bold;
   text-shadow: 0 0 10px rgba(72, 52, 212, 0.5);
 }
