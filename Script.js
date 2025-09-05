@@ -11,28 +11,33 @@ class TicTacToe {
 
     // Audio elements: References to HTML audio elements for game sounds and background music
     this.sounds = {
-      move: document.getElementById("moveSound"),      // Sound when player makes a move
-      win: document.getElementById("winSound"),        // Sound when player wins
-      draw: document.getElementById("drawSound"),      // Sound when game ends in draw
-      music: document.getElementById("bgMusic")        // Background music
+      move: document.getElementById("moveSound"), // Sound when player makes a move
+      win: document.getElementById("winSound"), // Sound when player wins
+      draw: document.getElementById("drawSound"), // Sound when game ends in draw
+      music: document.getElementById("bgMusic"), // Background music
     };
 
     // Game state variables - Track current game status
-    this.board = Array(9).fill("");           // Game board state (empty strings for empty cells)
-    this.currentPlayer = "X";                 // Current player (X starts first)
-    this.gameIsActive = true;                 // Whether the game is currently playable
-    
+    this.board = Array(9).fill(""); // Game board state (empty strings for empty cells)
+    this.currentPlayer = "X"; // Current player (X starts first)
+    this.gameIsActive = true; // Whether the game is currently playable
+
     // Sound and music toggle states: Control whether sound effects and background music are played
-    this.soundEnabled = true;                 // Sound effects on/off
-    this.musicEnabled = true;                 // Background music on/off
-    this.scores = { X: 0, O: 0, draw: 0 };   // Score tracking for both players and draws
-    this.winningCells = [];                   // Track winning cells for visual effects
+    this.soundEnabled = true; // Sound effects on/off
+    this.musicEnabled = true; // Background music on/off
+    this.scores = { X: 0, O: 0, draw: 0 }; // Score tracking for both players and draws
+    this.winningCells = []; // Track winning cells for visual effects
 
     // Win patterns: All possible winning combinations on the 3x3 board
     this.winPatterns = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal rows
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical columns
-      [0, 4, 8], [2, 4, 6]             // Diagonal patterns
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8], // Horizontal rows
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8], // Vertical columns
+      [0, 4, 8],
+      [2, 4, 6], // Diagonal patterns
     ];
 
     // Initialize the game
@@ -42,19 +47,21 @@ class TicTacToe {
   // Initialize the game with event listeners and starting state
   init() {
     // Add click event listener to each cell for player moves
-    this.cells.forEach(cell => cell.addEventListener("click", (e) => this.handleCellClick(e)));
-    
+    this.cells.forEach((cell) =>
+      cell.addEventListener("click", (e) => this.handleCellClick(e))
+    );
+
     // Add event listeners for control buttons
     this.resetButton.addEventListener("click", () => this.resetGame());
     this.soundToggle.addEventListener("click", () => this.toggleSound());
     this.musicToggle.addEventListener("click", () => this.toggleMusic());
-    
+
     // Set initial game status message
     this.updateStatus(`Player ${this.currentPlayer}'s turn`);
-    
+
     // Start playing background music when the game initializes
     this.playBackgroundMusic();
-    
+
     // Add enhanced visual feedback for better user experience
     this.addCellHoverEffects();
   }
@@ -63,31 +70,35 @@ class TicTacToe {
   handleCellClick(event) {
     const cell = event.target;
     const index = parseInt(cell.dataset.index);
-    
+
     // Check if the move is valid (cell is empty and game is still active)
     if (this.board[index] === "" && this.gameIsActive) {
+      // Start background music on first cell click if music is enabled and not already playing
+      if (this.musicEnabled && this.sounds.music.paused) {
+        this.playBackgroundMusic();
+      }
       // Update the game board state and cell display
       this.board[index] = this.currentPlayer;
       cell.textContent = this.currentPlayer;
-      
+
       // Add visual enhancement - CSS class for player-specific styling
-      cell.setAttribute('data-player', this.currentPlayer);
+      cell.setAttribute("data-player", this.currentPlayer);
       cell.classList.add(`player-${this.currentPlayer.toLowerCase()}`);
-      
+
       // Add cell animation for visual feedback
       this.addCellAnimation(cell);
-      
+
       // Play move sound effect when a player makes a valid move
       this.playSound(this.sounds.move);
-      
+
       // Check game outcome after the move
       if (this.checkWin()) {
         this.handleWin();
-      } 
+      }
       // Check if the board is full (draw condition)
-      else if (this.board.every(c => c !== "")) {
+      else if (this.board.every((c) => c !== "")) {
         this.handleDraw();
-      } 
+      }
       // Continue game - switch to the other player
       else {
         this.currentPlayer = this.currentPlayer === "X" ? "O" : "X";
@@ -101,7 +112,11 @@ class TicTacToe {
     // Check each winning pattern to see if current player has achieved it
     for (let pattern of this.winPatterns) {
       const [a, b, c] = pattern;
-      if (this.board[a] && this.board[a] === this.board[b] && this.board[a] === this.board[c]) {
+      if (
+        this.board[a] &&
+        this.board[a] === this.board[b] &&
+        this.board[a] === this.board[c]
+      ) {
         this.winningCells = pattern; // Store winning cells for visual effects
         return true;
       }
@@ -113,20 +128,20 @@ class TicTacToe {
   handleWin() {
     // Disable further moves
     this.gameIsActive = false;
-    
+
     // Update status message with celebration
     this.updateStatus(`🎉 Player ${this.currentPlayer} wins! 🎉`);
-    this.statusText.classList.add('win');
-    
+    this.statusText.classList.add("win");
+
     // Update and animate the score for the winning player
     this.scores[this.currentPlayer]++;
     const scoreElement = document.getElementById(`score${this.currentPlayer}`);
     scoreElement.textContent = this.scores[this.currentPlayer];
-    scoreElement.classList.add('updated');
-    
+    scoreElement.classList.add("updated");
+
     // Add visual effects to winning cells
     this.highlightWinningCells();
-    
+
     // Handle win sound effects
     if (this.soundEnabled) {
       // Pause background music during win sound playback for better audio experience
@@ -135,12 +150,12 @@ class TicTacToe {
       // Play win sound
       this.sounds.win.play().catch(() => {}); // Catch any audio play errors
     }
-    
+
     // Auto-reset game after delay with proper cleanup
     setTimeout(() => {
       this.resetGame();
-      this.statusText.classList.remove('win');
-      scoreElement.classList.remove('updated');
+      this.statusText.classList.remove("win");
+      scoreElement.classList.remove("updated");
     }, 2000);
   }
 
@@ -149,23 +164,23 @@ class TicTacToe {
     // Disable further moves
     this.gameIsActive = false;
     this.updateStatus("🤝 It's a draw!");
-    
+
     // Update and animate the draw score
     this.scores.draw++;
     const drawElement = document.getElementById("scoreDraw");
     drawElement.textContent = this.scores.draw;
-    drawElement.classList.add('updated');
+    drawElement.classList.add("updated");
 
     // Play draw sound effect when the game ends in a draw
     if (this.soundEnabled) {
       this.sounds.draw.currentTime = 0;
       this.sounds.draw.play().catch(() => {});
     }
-    
+
     // Auto-reset game after delay with cleanup
     setTimeout(() => {
       this.resetGame();
-      drawElement.classList.remove('updated');
+      drawElement.classList.remove("updated");
     }, 2000);
   }
 
@@ -173,22 +188,23 @@ class TicTacToe {
   resetGame() {
     // Clear the game board state
     this.board.fill("");
-    
+
     // Reset game state variables
     this.currentPlayer = "X";
     this.gameIsActive = true;
     this.winningCells = [];
-    
+
     // Clean up all visual effects and cell content
-    this.cells.forEach(cell => {
+    this.cells.forEach((cell) => {
       cell.textContent = "";
-      cell.removeAttribute('data-player');
-      cell.classList.remove('player-x', 'player-o', 'winning-cell');
+      cell.removeAttribute("data-player");
+      cell.classList.remove("player-x", "player-o", "winning-cell");
+      cell.style.background = "rgba(255, 255, 255, 0.9)"; // Reset to initial white background
     });
-    
+
     // Reset status message
     this.updateStatus(`Player ${this.currentPlayer}'s turn`);
-    
+
     // Restart background music if it's enabled
     if (this.musicEnabled) this.playBackgroundMusic();
   }
@@ -202,11 +218,11 @@ class TicTacToe {
   toggleSound() {
     this.soundEnabled = !this.soundEnabled;
     this.soundToggle.textContent = this.soundEnabled ? "🔊" : "🔇";
-    
+
     // Add visual feedback for the toggle action
-    this.soundToggle.style.transform = 'scale(0.9)';
+    this.soundToggle.style.transform = "scale(0.9)";
     setTimeout(() => {
-      this.soundToggle.style.transform = '';
+      this.soundToggle.style.transform = "";
     }, 150);
   }
 
@@ -214,18 +230,18 @@ class TicTacToe {
   toggleMusic() {
     this.musicEnabled = !this.musicEnabled;
     this.musicToggle.textContent = this.musicEnabled ? "🎵" : "🔇";
-    
+
     // Handle music playback based on new state
     if (this.musicEnabled) {
       this.playBackgroundMusic();
     } else {
       this.sounds.music.pause();
     }
-    
+
     // Add visual feedback for the toggle action
-    this.musicToggle.style.transform = 'scale(0.9)';
+    this.musicToggle.style.transform = "scale(0.9)";
     setTimeout(() => {
-      this.musicToggle.style.transform = '';
+      this.musicToggle.style.transform = "";
     }, 150);
   }
 
@@ -249,34 +265,34 @@ class TicTacToe {
 
   // Add animation to cell when it's clicked for visual feedback
   addCellAnimation(cell) {
-    cell.style.transform = 'scale(1.1)';
+    cell.style.transform = "scale(1.1)";
     setTimeout(() => {
-      cell.style.transform = '';
+      cell.style.transform = "";
     }, 200);
   }
 
   // Highlight winning cells with special visual effects
   highlightWinningCells() {
-    this.winningCells.forEach(index => {
+    this.winningCells.forEach((index) => {
       const cell = this.cells[index];
-      cell.classList.add('winning-cell');
+      cell.classList.add("winning-cell");
     });
   }
 
   // Add hover effects to cells for better user experience and visual feedback
   addCellHoverEffects() {
-    this.cells.forEach(cell => {
+    this.cells.forEach((cell) => {
       // Add hover effect when mouse enters cell
-      cell.addEventListener('mouseenter', () => {
-        if (cell.textContent === '' && this.gameIsActive) {
-          cell.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+      cell.addEventListener("mouseenter", () => {
+        if (cell.textContent === "" && this.gameIsActive) {
+          cell.style.backgroundColor = "rgba(102, 126, 234, 0.1)";
         }
       });
-      
+
       // Remove hover effect when mouse leaves cell
-      cell.addEventListener('mouseleave', () => {
-        if (cell.textContent === '' && this.gameIsActive) {
-          cell.style.backgroundColor = '';
+      cell.addEventListener("mouseleave", () => {
+        if (cell.textContent === "" && this.gameIsActive) {
+          cell.style.backgroundColor = "";
         }
       });
     });

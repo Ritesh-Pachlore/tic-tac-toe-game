@@ -3,15 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Classic Tic Tac Toe game with sound and music." />
+    <meta
+      name="description"
+      content="Classic Tic Tac Toe game with sound and music."
+    />
     <title>Tic Tac Toe - Classic Game</title>
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="Style.css" />
   </head>
   <body>
     <!-- Top toggle buttons for sound and music controls -->
-    <div class="sound-indicator" id="soundToggle" aria-label="Sound toggle" title="Toggle sound effects">🔊</div>
-    <div class="sound-indicator" id="musicToggle" aria-label="Music toggle" title="Toggle background music">🎵</div>
+    <div class="toggle-container">
+      <div
+        class="sound-indicator"
+        id="soundToggle"
+        aria-label="Sound toggle"
+        title="Toggle sound effects"
+      >
+        🔊
+      </div>
+      <div
+        class="sound-indicator"
+        id="musicToggle"
+        aria-label="Music toggle"
+        title="Toggle background music"
+      >
+        🎵
+      </div>
+    </div>
 
     <!-- Main game container with enhanced structure -->
     <main id="main-game" role="main">
@@ -50,11 +69,20 @@
       </section>
 
       <!-- Enhanced game status with dynamic styling -->
-      <section id="status" class="game-status" role="status" aria-live="polite"></section>
+      <section
+        id="status"
+        class="game-status"
+        role="status"
+        aria-live="polite"
+      ></section>
 
       <!-- Enhanced controls with better button design -->
       <footer class="controls">
-        <button id="resetBtn" class="btn btn-primary" aria-label="Reset the game">
+        <button
+          id="resetBtn"
+          class="btn btn-primary"
+          aria-label="Reset the game"
+        >
           <span class="btn-icon">🔄</span>
           <span class="btn-text">Reset Game</span>
         </button>
@@ -65,7 +93,10 @@
         <source src="sounds/click-345983.mp3" type="audio/mp3" />
       </audio>
       <audio id="winSound" preload="auto">
-        <source src="sounds/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3" type="audio/mp3" />
+        <source
+          src="sounds/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3"
+          type="audio/mp3"
+        />
       </audio>
       <audio id="drawSound" preload="auto">
         <source src="sounds/airy-whoosh-deep-228314.mp3" type="audio/mp3" />
