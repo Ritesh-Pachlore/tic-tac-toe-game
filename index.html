@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Classic Tic Tac Toe game with sound and music." />
+    <title>Tic Tac Toe - Classic Game</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="Style.css" />
+  </head>
+  <body>
+    <!-- Top toggle buttons for sound and music controls -->
+    <div class="sound-indicator" id="soundToggle" aria-label="Sound toggle" title="Toggle sound effects">🔊</div>
+    <div class="sound-indicator" id="musicToggle" aria-label="Music toggle" title="Toggle background music">🎵</div>
+
+    <!-- Main game container with enhanced structure -->
+    <main id="main-game" role="main">
+      <header>
+        <h1>Tic Tac Toe</h1>
+        <p class="subtitle">Experience the classic game with a modern twist</p>
+      </header>
+
+      <!-- Enhanced scoreboard with better visual hierarchy -->
+      <section class="score-board" aria-label="Game scores">
+        <div class="score-item">
+          <div class="score-label">Player X</div>
+          <div class="score-value" id="scoreX">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Draws</div>
+          <div class="score-value" id="scoreDraw">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Player O</div>
+          <div class="score-value" id="scoreO">0</div>
+        </div>
+      </section>
+
+      <!-- Enhanced game board with better visual feedback -->
+      <section class="board" role="grid">
+        <div class="cell" data-index="0" aria-label="Cell 1"></div>
+        <div class="cell" data-index="1" aria-label="Cell 2"></div>
+        <div class="cell" data-index="2" aria-label="Cell 3"></div>
+        <div class="cell" data-index="3" aria-label="Cell 4"></div>
+        <div class="cell" data-index="4" aria-label="Cell 5"></div>
+        <div class="cell" data-index="5" aria-label="Cell 6"></div>
+        <div class="cell" data-index="6" aria-label="Cell 7"></div>
+        <div class="cell" data-index="7" aria-label="Cell 8"></div>
+        <div class="cell" data-index="8" aria-label="Cell 9"></div>
+      </section>
+
+      <!-- Enhanced game status with dynamic styling -->
+      <section id="status" class="game-status" role="status" aria-live="polite"></section>
+
+      <!-- Enhanced controls with better button design -->
+      <footer class="controls">
+        <button id="resetBtn" class="btn btn-primary" aria-label="Reset the game">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">Reset Game</span>
+        </button>
+      </footer>
+
+      <!-- Audio elements remain unchanged for compatibility -->
+      <audio id="moveSound" preload="auto">
+        <source src="sounds/click-345983.mp3" type="audio/mp3" />
+      </audio>
+      <audio id="winSound" preload="auto">
+        <source src="sounds/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3" type="audio/mp3" />
+      </audio>
+      <audio id="drawSound" preload="auto">
+        <source src="sounds/airy-whoosh-deep-228314.mp3" type="audio/mp3" />
+      </audio>
+      <audio id="bgMusic" loop preload="auto">
+        <source src="sounds/fun-piano-bgm-242448.mp3" type="audio/mp3" />
+      </audio>
+    </main>
+
+    <!-- Link to external JavaScript file -->
+    <script src="Script.js"></script>
+  </body>
+</html>

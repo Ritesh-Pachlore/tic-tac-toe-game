@@ -1,0 +1,299 @@
+/* Enhanced CSS with light colorful design improvements */
+
+/* CSS Custom Properties for consistent theming */
+:root {
+  --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --accent-color: #333;
+  --secondary-accent: #666;
+  --border-color: #e0e0e0;
+  --font-primary: 'Arial', sans-serif;
+  /* Light colorful theme variables */
+  --hover-color: #f0f8ff;
+  --focus-color: #4CAF50;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --shadow-color: rgba(102, 126, 234, 0.2);
+}
+
+/* Body with simple light gradient background */
+body {
+  font-family: var(--font-primary);
+  /* Simple light gradient background with pastel colors */
+  background: linear-gradient(135deg, 
+    #ffeef8 0%,    /* Light pink */
+    #e8f4f8 25%,   /* Light blue */
+    #f0e8ff 50%,   /* Light purple */
+    #fff2e8 75%,   /* Light peach */
+    #e8fff0 100%   /* Light green */
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Main game container with glassmorphism effect */
+#main-game {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  /* Light colorful card design with backdrop blur */
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced header with colorful gradient text */
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  /* Colorful gradient text with animation */
+  background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+/* Animation for gradient text color shifting */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Subtitle styling */
+.subtitle {
+  color: var(--secondary-accent);
+  margin-bottom: 1.5rem;
+}
+
+/* Enhanced scoreboard layout */
+.score-board {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+/* Enhanced score item design with light colors */
+.score-item {
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 10px;
+  /* Light colorful hover effects */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.score-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Score labels styling */
+.score-label {
+  font-size: 0.9rem;
+  color: var(--secondary-accent);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Score values styling */
+.score-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+/* Game board grid layout */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Enhanced cell design with light colorful effects */
+.cell {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  /* Light colorful hover and transition effects */
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.cell:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.4);
+}
+
+/* Colorful styling for X player */
+.cell.player-x {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* Colorful styling for O player */
+.cell.player-o {
+  background: linear-gradient(45deg, #4834d4, #686de0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(72, 52, 212, 0.5);
+}
+
+/* Enhanced game status styling */
+.game-status {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  /* Light colorful styling for status messages */
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* Colorful win status styling with animation */
+.game-status.win {
+  background: linear-gradient(45deg, #55efc4, #74b9ff);
+  color: #fff;
+  border: 1px solid rgba(85, 239, 196, 0.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  animation: winPulse 1s ease-in-out infinite alternate;
+}
+
+/* Win status pulse animation */
+@keyframes winPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.02); }
+}
+
+/* Controls section layout */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Enhanced button styling with colorful design */
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Colorful button transitions */
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Primary button with gradient background */
+.btn-primary {
+  background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #e84393, #f39c12);
+}
+
+/* Button icon styling */
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+/* Colorful toggle buttons design */
+.sound-indicator {
+  position: fixed;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  /* Colorful hover effects for toggles */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.sound-indicator:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+/* Sound toggle positioning */
+#soundToggle {
+  top: 20px;
+}
+
+/* Music toggle positioning */
+#musicToggle {
+  top: 80px;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 600px) {
+  .board {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+  }
+  
+  .cell {
+    font-size: 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  #main-game {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .sound-indicator {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
