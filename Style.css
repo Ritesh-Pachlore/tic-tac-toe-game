@@ -235,6 +235,7 @@ header h1 {
 }
 
 /* Primary button with gradient background */
+
 .btn-primary {
   background: linear-gradient(45deg, #fd79a8, #fdcb6e);
   color: #fff;
@@ -242,6 +243,16 @@ header h1 {
 }
 
 .btn-primary:hover {
+  background: linear-gradient(45deg, #e84393, #f39c12);
+}
+
+/* Secondary button styled same as primary for consistency */
+.btn-secondary {
+  background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.btn-secondary:hover {
   background: linear-gradient(45deg, #e84393, #f39c12);
 }
 

@@ -5,7 +5,8 @@ class TicTacToe {
     // DOM Elements - Get references to all game elements for interaction
     this.cells = document.querySelectorAll(".cell");
     this.statusText = document.getElementById("status");
-    this.resetButton = document.getElementById("resetBtn");
+    this.resetButton = document.getElementById("restartBtn");
+    this.resetAllButton = document.getElementById("resetAllBtn");
     this.soundToggle = document.getElementById("soundToggle");
     this.musicToggle = document.getElementById("musicToggle");
 
@@ -53,6 +54,7 @@ class TicTacToe {
 
     // Add event listeners for control buttons
     this.resetButton.addEventListener("click", () => this.resetGame());
+    this.resetAllButton.addEventListener("click", () => this.resetAll());
     this.soundToggle.addEventListener("click", () => this.toggleSound());
     this.musicToggle.addEventListener("click", () => this.toggleMusic());
 
@@ -297,6 +299,17 @@ class TicTacToe {
         }
       });
     });
+  }
+
+  // Reset the whole game and all scores to zero
+  resetAll() {
+    // Reset scores
+    this.scores = { X: 0, O: 0, draw: 0 };
+    document.getElementById("scoreX").textContent = "0";
+    document.getElementById("scoreO").textContent = "0";
+    document.getElementById("scoreDraw").textContent = "0";
+    // Reset game board
+    this.resetGame();
   }
 }
 
